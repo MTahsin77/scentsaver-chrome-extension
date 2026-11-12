@@ -1,0 +1,27 @@
+# ScentSaver — Arabian Perfume Alternative Finder
+
+> On-demand Manifest V3 Chrome extension for ScentSaver (https://scentsaver.co.uk). Lets shoppers search designer perfume names or right-click highlighted fragrance titles on any page to find matching Arabian-inspired alternatives with live GBP pricing and UK stock availability.
+
+## Key Facts
+- Storefront: https://scentsaver.co.uk
+- Extension Standard: Chrome Manifest V3 (no third-party DOM injection or content_scripts)
+- Initial Catalog Snapshot: 973 inspired-by fragrances cached locally for 6 hours
+- Live Verification: Staggered price & stock check across top 3 results with 60s memoization and rate-limit backoff
+- Tests: Node.js native test runner (`node --test tests/*.test.mjs`, 22 passing tests)
+
+## Core Source Files
+- [manifest.json](manifest.json): Extension metadata, permissions (`storage`, `contextMenus`), scoped host permissions (`https://scentsaver.co.uk/*`, `https://*.scentsaver.co.uk/*`), and MV3 CSP.
+- [popup.html](popup.html): Extension popup interface markup.
+- [popup.css](popup.css): Brand styles (`#020202` header, `#ffffff` main surface, `#ed1d24` accents).
+- [src/background.js](src/background.js): Service worker registering selection context-menu lookups.
+- [src/api/shopifyClient.js](src/api/shopifyClient.js): Catalog cache synchronizer, seed fallback loader, live product verifier, and UTM link builders.
+- [src/search/aliases.js](src/search/aliases.js): Fragrance shorthand aliases, stop words, and popular designer chips.
+- [src/search/matcher.js](src/search/matcher.js): Unicode normalization, alias expansion, Dice bigram similarity, and in-stock-first ranking.
+- [src/ui/popup.js](src/ui/popup.js): Popup controller and strict-CSP DOM renderer (`document.createElement` + `textContent`).
+- [tests/matcher.test.mjs](tests/matcher.test.mjs): Unit tests for search normalization, aliases, fuzzy matching, and ranking.
+- [tests/shopifyClient.test.mjs](tests/shopifyClient.test.mjs): Unit tests for URL formatting, payload extraction, and staggered rate-limit handling.
+
+## Links
+- Storefront: https://scentsaver.co.uk
+- Support & Contact: https://scentsaver.co.uk/pages/contact
+- Privacy Policy: https://scentsaver.co.uk/policies/privacy-policy
