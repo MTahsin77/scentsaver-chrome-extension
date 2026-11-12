@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ScentSaver Perfume Finder</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-top">
+        <div class="brand-group">
+          <img src="assets/logo.svg" alt="ScentSaver" class="brand-logo" width="26" height="26">
+          <h1 class="brand-title">SCENTSAVER</h1>
+        </div>
+        <span class="badge-tag">DUPE FINDER</span>
+      </div>
+      <div class="shipping-banner">
+        <span>✨ Free UK Shipping on orders over £50</span>
+      </div>
+    </header>
+
+    <!-- Search Section -->
+    <section class="search-section">
+      <div class="search-input-wrapper">
+        <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+        </svg>
+        <input 
+          type="search" 
+          id="perfume-search-input" 
+          placeholder="Enter designer perfume (e.g. BR540, Aventus, Sauvage)..." 
+          autofocus 
+          autocomplete="off" 
+          spellcheck="false"
+        >
+        <button id="clear-search-btn" class="clear-btn" aria-label="Clear search" hidden>×</button>
+      </div>
+    </section>
+
+    <!-- Live Status / Loading Banner -->
+    <div id="status-banner" class="status-banner" hidden>
+      <span class="status-spinner" aria-hidden="true"></span>
+      <span id="status-text">Syncing ScentSaver catalog...</span>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Empty State: Popular Chips & Recent Searches -->
+      <section id="empty-state" class="empty-state">
+        <div id="recent-searches-group" class="chips-group" hidden>
+          <h2 class="section-subtitle">Recent Searches</h2>
+          <div id="recent-chips-container" class="chips-container"></div>
+        </div>
+
+        <div class="chips-group">
+          <h2 class="section-subtitle">Popular Designer Scent Searches</h2>
+          <div id="popular-chips-container" class="chips-container"></div>
+        </div>
+      </section>
+
+      <!-- Results List -->
+      <section id="results-section" class="results-section" hidden>
+        <div class="results-header">
+          <span id="results-count" class="results-count">0 alternatives found</span>
+        </div>
+        <ul id="results-list" class="results-list" role="listbox"></ul>
+      </section>
+
+      <!-- Zero Results State -->
+      <section id="zero-results-state" class="zero-results-state" hidden>
+        <p class="zero-title">No inspired Arabian match found in catalog</p>
+        <p class="zero-subtitle">We haven't indexed an Arabian clone for "<span id="zero-query-text"></span>" yet, but it might be available directly in our store.</p>
+        <a id="zero-fallback-link" class="btn-fallback-search" target="_blank" rel="noopener noreferrer">
+          Search ScentSaver Storefront ↗
+        </a>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <a href="https://scentsaver.co.uk?utm_source=chrome_extension&utm_medium=popup&utm_campaign=inspired_by_finder" target="_blank" rel="noopener noreferrer" class="footer-link">
+        100% Authentic Arabian Fragrances • scentsaver.co.uk
+      </a>
+    </footer>
+  </div>
+
+  <script type="module" src="src/ui/popup.js"></script>
+</body>
+</html>
+

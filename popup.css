@@ -1,0 +1,504 @@
+/* ==========================================================================
+   ScentSaver Chrome Extension — #020202 Brand + Crisp White Background
+   Matches ScenSaver_Logo.svg (#020202 header + #ed1d24 crimson accent)
+   ========================================================================== */
+
+:root {
+  --color-brand-black: #020202;
+  --color-brand-black-hover: #1f1f1f;
+  --color-brand-red: #ed1d24;
+  --color-brand-red-hover: #c8161d;
+  --color-brand-bg: #ffffff;
+  --color-brand-surface: #f9fafb;
+  --color-text-main: #020202;
+  --color-text-muted: #4b5563;
+  --color-border: #e5e7eb;
+  --color-border-focus: #020202;
+  --color-badge-red: #b91c1c;
+  --color-badge-red-bg: rgba(237, 29, 36, 0.1);
+  --color-badge-green: #15803d;
+  --color-badge-green-bg: #dcfce7;
+  --font-family-base: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+}
+
+/* CRITICAL: Ensure HTML hidden attribute always overrides display:flex/block */
+[hidden] {
+  display: none !important;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 380px;
+  max-height: 540px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  font-size: 13px;
+  color: var(--color-text-main);
+  background-color: var(--color-brand-bg);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 540px;
+  background-color: var(--color-brand-bg);
+}
+
+/* Header */
+.app-header {
+  background-color: var(--color-brand-black);
+  color: #ffffff;
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid #1f1f1f;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-logo {
+  border-radius: 6px;
+}
+
+.brand-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #ffffff;
+}
+
+.badge-tag {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  background-color: var(--color-brand-red);
+  color: #ffffff;
+  padding: 2px 7px;
+  border-radius: var(--border-radius-sm);
+}
+
+.shipping-banner {
+  margin-top: 8px;
+  background-color: #141414;
+  border: 1px solid #262626;
+  border-radius: var(--border-radius-sm);
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #e2e8f0;
+  text-align: center;
+}
+
+/* Search Section */
+.search-section {
+  padding: 12px 16px 10px;
+  background-color: var(--color-brand-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+#perfume-search-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 32px 0 36px;
+  font-family: inherit;
+  font-size: 12.5px;
+  color: var(--color-text-main);
+  background-color: var(--color-brand-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+#perfume-search-input::placeholder {
+  color: #9ca3af;
+}
+
+#perfume-search-input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow: 0 0 0 3px rgba(2, 2, 2, 0.08);
+  background-color: var(--color-brand-bg);
+}
+
+#perfume-search-input::-webkit-search-cancel-button,
+#perfume-search-input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.clear-btn {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.clear-btn:hover {
+  color: var(--color-brand-black);
+}
+
+/* Status Banner */
+.status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background-color: #fef2f2;
+  color: #991b1b;
+  font-size: 11px;
+  font-weight: 500;
+  border-bottom: 1px solid #fecaca;
+}
+
+.status-spinner {
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--color-brand-red);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 16px;
+  background-color: var(--color-brand-bg);
+}
+
+/* Empty State & Chips */
+.chips-group {
+  margin-bottom: 16px;
+}
+
+.section-subtitle {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-btn {
+  background-color: var(--color-brand-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-main);
+  padding: 6px 10px;
+  border-radius: var(--border-radius-sm);
+  font-family: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: left;
+}
+
+.chip-btn:hover {
+  background-color: var(--color-brand-black);
+  color: #ffffff;
+  border-color: var(--color-brand-black);
+}
+
+/* Results Section */
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.results-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.results-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Result Card */
+.result-card {
+  background-color: var(--color-brand-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.result-card:hover {
+  border-color: var(--color-brand-black);
+  box-shadow: 0 2px 8px rgba(2, 2, 2, 0.06);
+}
+
+.card-top {
+  display: flex;
+  gap: 12px;
+}
+
+.card-img-wrapper {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  background-color: var(--color-brand-surface);
+  border: 1px solid #f3f4f6;
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-placeholder-img {
+  color: #9ca3af;
+}
+
+.card-details {
+  flex: 1;
+  min-width: 0;
+}
+
+.inspired-by-pill {
+  display: inline-block;
+  background-color: rgba(237, 29, 36, 0.08);
+  color: #b91c1c;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-left: 2.5px solid var(--color-brand-red);
+}
+
+.card-title {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-main);
+  margin-bottom: 2px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-vendor {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* Price & Badge Row */
+.card-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px dashed var(--color-border);
+}
+
+.price-group {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.price-current {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-brand-black);
+}
+
+.price-compare {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+.price-savings {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-badge-red);
+  background-color: var(--color-badge-red-bg);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.stock-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.4px;
+}
+
+.stock-badge--in {
+  color: var(--color-badge-green);
+  background-color: var(--color-badge-green-bg);
+}
+
+.stock-badge--oos {
+  color: var(--color-badge-red);
+  background-color: var(--color-badge-red-bg);
+}
+
+/* Card CTA Button */
+.btn-view-product {
+  display: block;
+  width: 100%;
+  background-color: var(--color-brand-black);
+  color: #ffffff;
+  text-align: center;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-view-product:hover {
+  background-color: var(--color-brand-red);
+}
+
+/* Zero Results State */
+.zero-results-state {
+  text-align: center;
+  padding: 24px 12px;
+}
+
+.zero-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  margin-bottom: 6px;
+}
+
+.zero-subtitle {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.btn-fallback-search {
+  display: inline-block;
+  background-color: var(--color-brand-black);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: var(--border-radius-sm);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.btn-fallback-search:hover {
+  background-color: var(--color-brand-red);
+}
+
+/* Footer */
+.app-footer {
+  padding: 10px 16px;
+  background-color: var(--color-brand-surface);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.footer-link {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.footer-link:hover {
+  color: var(--color-brand-black);
+  text-decoration: underline;
+}
+
+/* Custom Light Scrollbar */
+.main-content::-webkit-scrollbar {
+  width: 6px;
+}
+.main-content::-webkit-scrollbar-track {
+  background: var(--color-brand-bg);
+}
+.main-content::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
+}
+.main-content::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
